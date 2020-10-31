@@ -1,5 +1,5 @@
 image==1.5.20
 numpy==1.18.5
-tensorflow==2.3.0
-keras==2.3.0
+keras==2.3
 pandas_datareader
+tensorflow==2.3
