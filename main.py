@@ -124,7 +124,7 @@ plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Validation', 'Prediction'], loc = 'lower right')
 
 show_graph2 = input("Would like to visualize the model? [y/n]: ")
-if show_graph == 'y':
+if show_graph2 == 'y':
     plt.show()
 
 #show the valid and predicted prices
@@ -157,6 +157,15 @@ pred_price = scaler.inverse_transform(pred_price)
 print(pred_price)
 
 
-prediction_date = input('Enter prediction date: ')
-company_quote2 = web.DataReader(company, data_source='yahoo', start = prediction_date, end=prediction_date)
-print(company_quote2['Close'])
+#Check if the date exixt in the dataset and print it
+df2 = web.DataReader('AAPL', data_source='yahoo', start='01/01/2001')
+new_df = df2.reset_index()
+wrongdate = True
+while(wrongdate == True):
+    prediction_date = input('Enter prediction date: ')
+    if(new_df['Date'].isin([prediction_date])).any():
+        wrongdate = False
+        company_quote2 = web.DataReader('AAPL', data_source='yahoo', start = prediction_date, end=prediction_date)
+        print(company_quote2['Close'])
+    else:
+        print('Date does not exist in database')
